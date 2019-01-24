@@ -303,6 +303,10 @@ mntpnt="${TOS_MOUNTPOINT:-/mnt/tos}"
 isofile="$1"
 param2="$2"
 grep RedSea < /etc/mtab && fusermount -u ~/iso
+echo "waiting for umount..."
+while grep RedSea < /etc/mtab; do
+  sleep 0.2
+done
 isoc-mount "$isofile" ~/iso || exit
 echo "waiting for mount to come up..."
 while ! grep RedSea < /etc/mtab; do
