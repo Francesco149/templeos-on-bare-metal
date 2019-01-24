@@ -36,7 +36,7 @@ eventually find something like this:
 ```
 
 note that this output is from my main pc, the output from the actual 775
-build i booted TempleOS on was this: ![](https://i.imgur.com/Q7Khzqh.jpg)
+build i booted TempleOS on was this: ![](images/Q7Khzqh.jpg)
 
 if you have ide you will also see another entry for the ide controller.
 write down the i/o ports for your controller (if you use a sata hdd you
@@ -59,8 +59,8 @@ if the disk is unpartitioned it should prompt you automatically to
 partition, but if it doesn't, just open a new window with CTRL+ALT+T and
 run ```DskPrt;```
 
-![](https://i.imgur.com/OD0Qi7R.jpg)
-![](https://i.imgur.com/bq0e4e0.jpg)
+![](images/OD0Qi7R.jpg)
+![](images/bq0e4e0.jpg)
 
 because TempleOS has, in Terry's words, "half-assed FAT32 support", the
 ideal setup is using redsea filesystem for your main partition and then
@@ -72,8 +72,8 @@ to get corrupted
 
 after rebooting I was able to boot TempleOS from disk just fine.
 
-![](https://i.imgur.com/LFpEAJq.jpg)
-![](https://i.imgur.com/OWxpGvk.jpg)
+![](images/LFpEAJq.jpg)
+![](images/OWxpGvk.jpg)
 
 this is great, but i want to run TempleOS in dual boot with linux on my
 thinkpad, so how can I get it to install on a pre-partitioned drive?
@@ -107,7 +107,7 @@ the Kernel binary. it prints the os version, "Enable IRQ's" and then
 throws on ```DskChg(':')```, and it seems like DrvChk is failing
 specifically
 
-![](https://i.imgur.com/w2DWIby.jpg)
+![](images/w2DWIby.jpg)
 
 turns out that by simply running ```BootHDIns('D');``` (or whatever drive
 letter you installed on) you recompile and reinstall the kernel. it
