@@ -304,7 +304,7 @@ echo "waiting for mount to come up..."
 while ! grep RedSea < /etc/mtab; do
   sleep 0.2
 done
-rsync ~/iso --exclude='*.BIN.C' -rvu /mnt/tos/ &&
+rsync ~/iso/ --exclude='*.BIN.C' -rvu /mnt/tos &&
 echo "BIN.C files that were NOT copied:" &&
 find ~/iso -name '*.BIN.C'
 fusermount -u ~/iso
