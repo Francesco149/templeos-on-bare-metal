@@ -242,6 +242,10 @@ if in doubt, you can do ```Dump("C:/0000Boot/OldMBR.C.BIN");``` and
 ```Dump("D:/0000Boot/OldMBR.C.BIN");``` and see which one has grub related
 text in it, and keep the one that does
 
+```BootMHDIns('C');``` is what actually overwrites an backs up the MBR,
+so if you accidentally overwrite templeOS' mbr you can always reinstall it
+by running this command from the live dvd without wiping your install
+
 and here's [a video of the thinkpad booting TempleOS and Linux](https://streamable.com/bj6qy)
 
 I know the TempleOS version I'm running is not the latest, I have hundreds
