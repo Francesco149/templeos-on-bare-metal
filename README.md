@@ -299,12 +299,25 @@ BIN.C files:
 ```
 #!/bin/sh
 
-isoc-mount "$@" ~/iso || exit
+mntpnt="${TOS_MOUNTPOINT:-/mnt/tos}"
+isofile="$1"
+param2="$2"
+grep RedSea < /etc/mtab && fusermount -u ~/iso
+isoc-mount "$isofile" ~/iso || exit
 echo "waiting for mount to come up..."
 while ! grep RedSea < /etc/mtab; do
   sleep 0.2
 done
-rsync ~/iso/ --exclude='*.BIN.C' -rvu /mnt/tos &&
+shift
+case "$param2" in
+ --*) destdir="$mntpnt" ;;
+ *)
+  destdir="$mntpnt/$param2"
+  shift
+  ;;
+esac
+mkdir -p "$destdir"
+rsync ~/iso/ "$@" --exclude='*.BIN.C' -rvu "$destdir" &&
 echo "BIN.C files that were NOT copied:" &&
 find ~/iso -name '*.BIN.C'
 fusermount -u ~/iso
@@ -315,6 +328,20 @@ adjust to your TempleOS mount-point, save as tos-mirror and run
 ```
 chmod +x tos-mirror
 tos-mirror TOS_Distro.ISO
+```
+
+this script supports more advanced options, such as
+
+mirroring to a specific directory
+
+```
+tos-mirror TOS_Supplemental1.ISO Home/Sup1
+```
+
+checking what files would be copied without actually copying them
+
+```
+tos-mirror TOS_Web.ISO --dry-run
 ```
 
 after you're done copying everything you can boot into TempleOS and do a
