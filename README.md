@@ -8,6 +8,9 @@ on the thinkpad (no docking station yet) so I put together a temporary pc
 with old 775 era parts (msi g41m-p33 combo + intel q9650) and found an
 old ide dvd burner that I used to burn the iso to a dvd
 
+another thing to note is that you must use PS2 mouse and keyboard, usb
+is not supported
+
 this was enough to boot from dvd on the temporary machine.
 
 the next step is to see if i can get it to install on a hdd or ssd. you
