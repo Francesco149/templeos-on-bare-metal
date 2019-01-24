@@ -239,3 +239,96 @@ of ISO's from the archive and didn't manage to pick the newest one in
 a hurry. I will copy over the latest 5.03 files and all the supplementals,
 it's easy once you got everything installed, just copy the new files from
 linux to FAT, then from FAT to redsea and recompile the kernel
+
+# Installing supplementals
+instad of burning each ISO's to new disks we can just mount them from
+linux and copy the files to the FAT partition. there's a fuse
+implementation of the red sea file system that should be enough to get
+files off the iso
+
+boot into linux and install fuse, python2.7 and pip for python2.7. on
+arch linux, the packages would be ```pacman -S fuse python2 python2-pip```
+
+now install obecebo's fuse driver for redsea
+
+```
+wget https://raw.githubusercontent.com/obecebo/redseafs/master/isoc.py
+wget https://raw.githubusercontent.com/obecebo/redseafs/master/isoc-mount
+```
+
+edit both files and change the first line from
+
+```
+#!/usr/bin/env python
+```
+
+to
+
+```
+#!/usr/bin/env python2.7
+```
+
+as the code is python2 specific
+
+```
+chmod +x isoc-mount
+sudo mv isoc-mount /usr/bin/
+sudo mv isoc.py /usr/bin/
+```
+
+now we can mount ISO's like so
+
+```
+isoc-mount TOS_Distro.ISO ~/iso
+```
+
+now you can copy everything from ~/iso to your TempleOS FAT partition,
+but ** be careful not to overwrite any .BIN.C files ** as this would
+break your install if you don't know what you're doing
+
+to be fair, it's fine if you break your FAT install as long as you don't
+copy the BIN files to the redsea partition, because you'd still be able
+to boot into the redsea partition, copy the new files, recompile the kernel
+and install it on both partitions. but it's better to be safe than sorry.
+if your TempleOS install becomes unusable and you don't have any back-ups
+you'll need to boot from CD/DVD to repair it
+
+this a script I wrote to rsync an iso to the fat partition while excluding
+BIN.C files:
+
+```
+#!/bin/sh
+
+isoc-mount "$@" ~/iso || exit
+echo "waiting for mount to come up..."
+while ! grep RedSea < /etc/mtab; do
+  sleep 0.2
+done
+rsync ~/iso --exclude='*.BIN.C' -rvu /mnt/tos/ &&
+echo "BIN.C files that were NOT copied:" &&
+find ~/iso -name '*.BIN.C'
+fusermount -u ~/iso
+```
+
+adjust to your TempleOS mount-point, save as tos-mirror and run
+
+```
+chmod +x tos-mirror
+tos-mirror TOS_Distro.ISO
+```
+
+after you're done copying everything you can boot into TempleOS and do a
+
+```
+CopyTree("D:/","C:/");
+```
+
+then recompile the kernel
+
+```
+BootHDIns('C');
+```
+
+as a safety measure, you could instead boot into D (the FAT partition),
+recompile the kernel from there, reboot, see if it boots and then
+copy it over to redsea
