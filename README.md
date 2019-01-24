@@ -37,7 +37,7 @@ build i booted TempleOS on was this: ![](https://i.imgur.com/Q7Khzqh.jpg)
 
 if you have ide you will also see another entry for the ide controller.
 write down the i/o ports for your controller (if you use a sata hdd you
-would write down the ones for the sata controller, and vice versa)kjA
+would write down the ones for the sata controller, and vice versa)
 
 at this point I booted back into TempleOS and tried to install to disk.
 at the I/O port prompt I instead opened a separate terminal with
@@ -101,7 +101,7 @@ to make the install work on a different machine
 [Boot.DD](https://templeos.holyc.xyz/Wb/Doc/Boot.html) describes the boot
 process, but from the error I get I know we're at least hitting KMain in
 the Kernel binary. it prints the os version, "Enable IRQ's" and then
-throws on ```DskChg(':')```, and ti seems like DrvChk is failing
+throws on ```DskChg(':')```, and it seems like DrvChk is failing
 specifically
 
 ![](https://i.imgur.com/w2DWIby.jpg)
