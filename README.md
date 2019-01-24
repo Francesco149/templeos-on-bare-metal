@@ -205,11 +205,21 @@ so what I'm gonna do is:
   over it so it properly backs up the old MBR and I'll be able to boot
   linux from the TempleOS bootloader
 
-to reinstall grub i simply chrooted into the linux partition and did
+to reinstall grub i simply chrooted into the linux partition:
 
 ```
+sudo mount /dev/disk/by-id/ata-KINGSTON_XXXXXXXXXXXX_XXXXXXXXXXXXXXXX-part3 /mnt/parabola
+sudo mount -o bind /dev /mnt/parabola/dev
+sudo mount -t devpts /dev/pts /mnt/parabola/dev/pts
+sudo mount -t proc proc /mnt/parabola/proc
+sudo mount -t sysfs sys /mnt/parabola/sys
+sudo chroot /mnt/parabola
+bash
 grub-install --target=i386-pc /dev/disk/by-id/ata-KINGSTON_XXXXXXXXXXXX_XXXXXXXXXXXXXXXX
 grub-mkconfig -o /boot/grub/grub.config
+exit
+exit
+sudo umount -lf /mnt/parabola/{dev{/pts,},proc,sys,}
 ```
 
 then I edited /etc/fstab, it used to be sda1 root and sda2 swap but now
