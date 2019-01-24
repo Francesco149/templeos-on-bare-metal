@@ -230,3 +230,9 @@ if in doubt, you can do ```Dump("C:/0000Boot/OldMBR.C.BIN");``` and
 text in it, and keep the one that does
 
 and here's [a video of the thinkpad booting TempleOS and Linux](https://streamable.com/bj6qy)
+
+I know the TempleOS version I'm running is not the latest, I have hundreds
+of ISO's from the archive and didn't manage to pick the newest one in
+a hurry. I will copy over the latest 5.03 files and all the supplementals,
+it's easy once you got everything installed, just copy the new files from
+linux to FAT, then from FAT to redsea and recompile the kernel
