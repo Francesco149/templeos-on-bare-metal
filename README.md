@@ -266,6 +266,8 @@ arch linux, the packages would be ```pacman -S fuse python2 python2-pip```
 now install obecebo's fuse driver for redsea
 
 ```
+pip2.7 install --user fusepy
+sudo modprobe fuse
 wget https://raw.githubusercontent.com/obecebo/redseafs/master/isoc.py
 wget https://raw.githubusercontent.com/obecebo/redseafs/master/isoc-mount
 ```
