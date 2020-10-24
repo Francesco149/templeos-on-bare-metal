@@ -1,3 +1,8 @@
+# UPDATE: new guide that doesn't require extra hardware or a CD/DVD drive
+
+hey, I rewrote the guide to be much simpler, check this out:
+https://github.com/Francesco149/gopher/blob/master/blog/000005-templeos-dualboot-baremetal-without-cd.md
+
 # Installing TempleOS on baremetal on machines without a CD/DVD drive and dual-booting with linux
 
 so I wanted to get TempleOS running on bare metal, specifically on my
